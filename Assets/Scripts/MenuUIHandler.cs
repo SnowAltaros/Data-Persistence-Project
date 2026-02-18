@@ -12,12 +12,6 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
     public TMP_InputField nameInput;
-    public TextMeshProUGUI bestScoreText;
-
-    private void Start()
-    {
-        bestScoreText.text = $"Best Score : {PlayerDataFlow.instance.playerName} : {PlayerDataFlow.instance.score}";
-    }
 
     public void StartNew()
     {
@@ -31,6 +25,11 @@ public class MenuUIHandler : MonoBehaviour
         nameInput.image.color = Color.white; // Reset to default color
         PlayerDataFlow.instance.newPlayerName = nameInput.text;
         SceneManager.LoadScene(1);
+    }
+
+    public void ToBestScores()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void Exit()

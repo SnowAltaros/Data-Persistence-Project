@@ -38,7 +38,15 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        BestScoreText.text = $"Best Score : {PlayerDataFlow.instance.playerName} : {PlayerDataFlow.instance.score}";
+        if (PlayerDataFlow.instance.topPlayers.Count != 0)
+        {
+            BestScoreText.text = $"Best Score : {PlayerDataFlow.instance.topPlayers[0].playerName} : {PlayerDataFlow.instance.topPlayers[0].score}";
+        }
+        else
+        {
+            BestScoreText.text = "No Best Score Yet";
+        }
+        
     }
 
     private void Update()
@@ -76,11 +84,6 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
 
-        if (m_Points > PlayerDataFlow.instance.score)
-        {
-            PlayerDataFlow.instance.playerName = PlayerDataFlow.instance.newPlayerName;
-            PlayerDataFlow.instance.score = m_Points;
-            PlayerDataFlow.instance.SavePlayerData();
-        }
+        PlayerDataFlow.instance.AddPlayer(PlayerDataFlow.instance.newPlayerName, m_Points);
     }
 }
